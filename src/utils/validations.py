@@ -1,18 +1,24 @@
 import os
-
+import re
 
 class Validations:
     def __init__(self):
         pass
 
     def is_empty(self, value):
-        if value == "":
+        if value == None or value == "" or value == " " or len(re.sub(r"\s+", "", str(value))) == 0:
             return True
         else:
             return False
 
     def is_file(self, file_path):
         if os.path.isfile(file_path):
+            return True
+        else:
+            return False
+    
+    def is_dir(self, file_path):
+        if os.path.isdir(file_path):
             return True
         else:
             return False

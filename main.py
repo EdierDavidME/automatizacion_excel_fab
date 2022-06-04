@@ -7,6 +7,7 @@ LINES = 25
 
 parser = ap.ArgumentParser()
 parser.add_argument("-f", "--file", help="File to be read", required=True)
+parser.add_argument("-o", "--ouput", help="Dir to save", required=False)
 args = parser.parse_args()
 
 
@@ -14,8 +15,7 @@ args = parser.parse_args()
 #     if __name__ == "main":
 print("#\tExcel\t\t#")
 print("-"*LINES)
-
-read_file = ReadFiles(args.file)
+read_file = ReadFiles(args.file, str(args.ouput))
 print(read_file.read_file())
 
 
