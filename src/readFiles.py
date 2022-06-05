@@ -8,10 +8,11 @@ class ReadFiles:
     ReadFiles class
     """
 
-    def __init__(self, file_name, folder_ouput):
+    def __init__(self, file_name, folder_ouput, sheet):
         """
         Constructor
         """
+        self.sheet = sheet
         self.temp_path = folder_ouput
         self.Validations = Val()
         self.file_extension = file_name.split(".")[1]
@@ -64,8 +65,8 @@ class ReadFiles:
         Reads an excel file
         """
         try:
-            excel = Excel(self.path_file, self.folder_ouput_save)
-            excel.write()
+            excel = Excel(self.path_file, self.folder_ouput_save, self.sheet)
+            return excel.read()
 
         except Exception as e:
             return("* Error: {}".format(e))
