@@ -1,5 +1,6 @@
 from openpyxl import Workbook, load_workbook
 from src.utils.validations import Validations as vld
+from datetime import datetime
 
 
 class ExcelFiles:
@@ -64,6 +65,7 @@ class ExcelFiles:
                 if dict is not None:
                     self.wb['test'][f'E{dict["position"]}'] = 'Y'
             self.wb.save(self.file)
+            print("END: ", datetime.now())
             return 'Done!'
 
         except Exception as e:
