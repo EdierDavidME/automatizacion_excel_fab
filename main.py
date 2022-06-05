@@ -22,5 +22,7 @@ END = read_file.read_file()
 print("START: ", START)
 print("END: ", END)
 print("TOTAL: ", END-START)
+print("Done! ")
+
 
 # main()
