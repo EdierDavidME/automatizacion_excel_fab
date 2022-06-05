@@ -16,10 +16,10 @@ args = parser.parse_args()
 print("#\tExcel\t\t#")
 print("-"*LINES)
 START = datetime.now()
-print("START: ", START)
 read_file = ReadFiles(args.file, str(args.ouput), str(args.sheet))
 END = read_file.read_file()
 
+print("START: ", START)
 print("END: ", END)
 print("TOTAL: ", END-START)
 
