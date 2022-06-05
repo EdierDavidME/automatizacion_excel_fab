@@ -38,32 +38,40 @@ class ExcelFiles:
             # GET NITs
             current_row = 2
             dict = None
+            data = tuple(self.wb['test'].iter_rows(min_col=1, min_row=current_row))
 
-            for position, row in enumerate(self.wb['test'].iter_rows(min_col=1, min_row=current_row)):
-                print("\n")
-                print("-"*25)
-                print("Code Position: {}".format(position))
-                print("Excel Row: {}".format(current_row))
-                print("-"*25)
+            for position, row in enumerate(data):
+                print("\n self.duplicate", self.duplicate, "\n", row[0].value)
 
                 dict = None
                 count_duplicates, current_row, current_row2 = 0, current_row+1, current_row+1
+                if row[0].value not in self.duplicate:
+                    print("\n")
+                    print("-"*25)
+                    print("Code Position: {}".format(position))
+                    print("Excel Row: {}".format(current_row))
+                    print("-"*25)
 
-                for index, search in enumerate(self.wb['test'].iter_rows(min_col=1, min_row=current_row)):
                     count = 0
-                    
-                    if row[0].value not in self.duplicate and row[0].value == search[0].value:
-                        self.duplicate.append(row[0].value)
-                        count_duplicates += 1
-                        if count == 0:
-                            dict = {'position': current_row-1,
-                                    'cod': row[3].value}
+                    for index, search in enumerate(self.wb['test'].iter_rows(min_col=1, min_row=current_row)):
+                        # print("\n\n")
+                        # print("#"*25)
+                        # print("## Code Position: {}".format(index))
+                        # print("## Excel Row: {}".format(current_row2))
+                        # print("#"*25)
 
-                        if dict['cod'] > search[3].value:
-                            dict['position'] = current_row2
-                            dict['cod'] = search[3].value
-                    current_row2 += 1
-                    count += 1
+                        if row[0].value == search[0].value:
+                            count_duplicates += 1
+                            if count == 0:
+                                self.duplicate.append(row[0].value)
+                                dict = {'position': current_row-1,
+                                        'cod': row[3].value}
+
+                            if dict['cod'] > search[3].value:
+                                dict['position'] = current_row2
+                                dict['cod'] = search[3].value
+                        current_row2 += 1
+                        count += 1
 
                 if count_duplicates == 0:
                     if row[0].value not in self.duplicate:
@@ -72,7 +80,7 @@ class ExcelFiles:
                     self.wb['test'][f'E{dict["position"]}'] = 'Y'
                 self.wb.save(self.dir)
             self.wb.save(self.file)
-            
+
             return datetime.now()
 
         except Exception as e:

@@ -39,7 +39,7 @@ class ReadFiles:
             elif(self.Validations.is_file(self.path_file)):
                 if self.file_extension == "txt":
                     return self.read_txt_file()
-                elif self.file_extension == "xlsx":
+                elif self.file_extension in ["xls", "xlsx", "xlsm", "xlsb", "csv"]:
                     return self.read_excel_file()
             else:
                 raise Exception("File does not exist")
