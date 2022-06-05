@@ -40,6 +40,12 @@ class ExcelFiles:
             dict = None
 
             for position, row in enumerate(self.wb['test'].iter_rows(min_col=1, min_row=current_row)):
+                print("\n")
+                print("-"*25)
+                print("Code Position: {}".format(position))
+                print("Excel Row: {}".format(current_row))
+                print("-"*25)
+
                 dict = None
                 count_duplicates, current_row, current_row2 = 0, current_row+1, current_row+1
 
@@ -64,6 +70,7 @@ class ExcelFiles:
                         self.wb['test'][f'E{current_row-1}'] = 'Y'
                 if dict is not None:
                     self.wb['test'][f'E{dict["position"]}'] = 'Y'
+                self.wb.save(self.dir)
             self.wb.save(self.file)
             
             return datetime.now()
