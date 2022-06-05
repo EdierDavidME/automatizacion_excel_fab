@@ -40,7 +40,7 @@ class ExcelFiles:
             max_r = 85346
             dict = None
             data = tuple(self.wb['test'].iter_rows(
-                min_col=1, min_row=current_row,  max_row=max_r))
+                min_col=1, min_row=current_row))
 
             for position, row in enumerate(data):
                 print("\n self.duplicate", self.duplicate, "\n", row[0].value)
@@ -55,7 +55,7 @@ class ExcelFiles:
                     print("-"*25)
 
                     count = 0
-                    for index, search in enumerate(self.wb['test'].iter_rows(min_col=1, min_row=current_row, max_row=max_r)):
+                    for index, search in enumerate(self.wb['test'].iter_rows(min_col=1, min_row=current_row)):
                         # print("\n\n")
                         # print("#"*25)
                         # print("## Code Position: {}".format(index))
