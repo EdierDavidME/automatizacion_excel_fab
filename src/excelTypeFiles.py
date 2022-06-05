@@ -65,8 +65,8 @@ class ExcelFiles:
                 if dict is not None:
                     self.wb['test'][f'E{dict["position"]}'] = 'Y'
             self.wb.save(self.file)
-            print("END: ", datetime.now())
-            return 'Done!'
+            
+            return datetime.now()
 
         except Exception as e:
             print(e)
