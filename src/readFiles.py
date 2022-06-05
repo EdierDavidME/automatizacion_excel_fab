@@ -18,9 +18,9 @@ class ReadFiles:
         self.file_extension = file_name.split(".")[1]
         self.file_name = file_name
         self.folder_path = os.path.dirname(
-            os.path.abspath(__file__)) + "\\assets"
+            os.path.abspath(__file__)) + "//assets"
         self.folder_ouput_save = folder_ouput if self.Validations.is_dir(self.temp_path) else os.path.dirname(
-            os.path.abspath(__file__)) + "\\assets"
+            os.path.abspath(__file__)) + "//assets"
         self.path_file = os.path.join(self.folder_path, self.file_name)
         # self.file_content = self.read_file()
 
