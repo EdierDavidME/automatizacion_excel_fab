@@ -37,8 +37,10 @@ class ExcelFiles:
         try:
             # GET NITs
             current_row = 2
+            max_r = 85346
             dict = None
-            data = tuple(self.wb['test'].iter_rows(min_col=1, min_row=current_row))
+            data = tuple(self.wb['test'].iter_rows(
+                min_col=1, min_row=current_row,  max_row=max_r))
 
             for position, row in enumerate(data):
                 print("\n self.duplicate", self.duplicate, "\n", row[0].value)
@@ -53,7 +55,7 @@ class ExcelFiles:
                     print("-"*25)
 
                     count = 0
-                    for index, search in enumerate(self.wb['test'].iter_rows(min_col=1, min_row=current_row)):
+                    for index, search in enumerate(self.wb['test'].iter_rows(min_col=1, min_row=current_row, max_row=max_r)):
                         # print("\n\n")
                         # print("#"*25)
                         # print("## Code Position: {}".format(index))
@@ -70,15 +72,15 @@ class ExcelFiles:
                             if dict['cod'] > search[3].value:
                                 dict['position'] = current_row2
                                 dict['cod'] = search[3].value
+                            count += 1
                         current_row2 += 1
-                        count += 1
 
                 if count_duplicates == 0:
                     if row[0].value not in self.duplicate:
                         self.wb['test'][f'E{current_row-1}'] = 'Y'
                 if dict is not None:
                     self.wb['test'][f'E{dict["position"]}'] = 'Y'
-                self.wb.save(self.dir)
+                # self.wb.save(self.dir)
             self.wb.save(self.file)
 
             return datetime.now()
